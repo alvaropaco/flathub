@@ -2,7 +2,8 @@
 # A secure, decentralized and fully local password manager
 #
 # Installs from pre-built AppImages published on GitHub Releases.
-# Supports x86_64 and aarch64 (see flathub.json).
+# Desktop entry and AppStream metainfo are pulled directly from the upstream
+# pearpass-app-desktop repository (single source of truth under flatpak/).
 #
 # Build locally with:
 #   flatpak-builder --force-clean build-dir com.pears.pass.yml
@@ -127,8 +128,13 @@ modules:
         sha512: 08dcb60ad2671e1c3218c7fbd2323a9cf7a97a80ab460307bd1c85d91334b2052033d7ad8651ef4e88e0b31af59ffc002785ac76f0945108ef317a242f1bd040
         dest-filename: com.pears.pass.png
 
-      # Desktop entry and AppStream metainfo live alongside the manifest.
+      # Desktop entry and AppStream metainfo are managed upstream under
+      # pearpass-app-desktop/flatpak/. TODO: repin both URLs to a specific
+      # commit sha (and bump both sha512s) on every upstream change to keep
+      # Flathub builds reproducible — `main` is a temporary placeholder.
       - type: file
-        path: com.pears.pass.desktop
+        url: https://raw.githubusercontent.com/tetherto/pearpass-app-desktop/main/flatpak/com.pears.pass.desktop
+        sha512: 0cdd3aa9d8f8b20db9130cf89b95c7580bbe66853b789ce703aad98477b17409a2c0124583d7b75ad98873084de68159d0e3f2ab53ea6c5db833747d3f8a1445
       - type: file
-        path: com.pears.pass.metainfo.xml
+        url: https://raw.githubusercontent.com/tetherto/pearpass-app-desktop/main/flatpak/com.pears.pass.metainfo.xml
+        sha512: d8910c682af43d7733647ff40bd1e1bdc442d94897b34d53dc5fc90cddadabf0caed4a1e2a770eec681a572fcd40331dc31dd8d9e5b5141ac23e87784354403c
